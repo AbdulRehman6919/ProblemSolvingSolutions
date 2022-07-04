@@ -1,0 +1,31 @@
+Solution To Question no 1
+
+
+#if array is odd
+# arr = [5,7,9,21,34]
+
+#if array is even
+arr=[5,7,21,34]
+arr.sort()
+
+temp_arr=[]
+if len(arr) %2!=0:
+    temp_arr.append(arr[len(arr)//2])
+    starting_range = (len(arr)//2)+1
+else:
+    starting_range =  (len(arr)//2)
+
+for first,last in zip(range(0,(len(arr)//2),1),range(starting_range,len(arr))):
+    temp_arr +=[arr[last],arr[first]]
+
+print(temp_arr)
+
+result = temp_arr[0]      
+for index in range(1,len(temp_arr)):
+    if index%2!=0:
+        result *= temp_arr[index]
+        print(result)
+    else:
+        result *=(1/temp_arr[index])
+        print(result)
+     
