@@ -1,0 +1,19 @@
+def lambdaMap(arr):
+    temp = []
+    for array in arr :
+        
+        ans = list(map(lambda x:x if x>0 else "", array))
+        
+        
+        resp =  [str(i*i) for i in ans if i!=""]
+        temp.append(resp)
+    return temp
+if __name__ == '__main__':
+    n = int(input())
+    arr = []
+    for _ in range(n):
+        arr.append(list(map(int, input().split())))
+    
+    ans = lambdaMap(arr)
+    for row in ans:
+        print(' '.join(map(str, row)))

@@ -1,0 +1,67 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+import inspect
+def log(descriptor):
+    
+    # Implement the decorator here
+    def inner_function(fptr):
+        
+        
+        def new(*args):
+            
+            data= args
+            temp= ''
+            for i in data:
+                temp = temp+str(i)+" "
+            
+            # result = log(args)
+            descriptor.write("LOG: "+str(fptr.__name__)+"("+str(temp.strip().replace(" ",","))+")"+"\n")
+    
+            return fptr(*args)
+        
+        return new
+    return inner_function
+    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    @log(fptr)
+    def my_max(a, b, c):
+        return max(a, b, c)
+
+
+    @log(fptr)
+    def my_min(a, b):
+        
+        return min(a, b)
+
+
+    @log(fptr)
+    def my_sum(*args):
+        return sum(args)
+
+
+    q = int(input())
+    for _ in range(q):
+        line = input().split()
+        f_name, params = line[0], map(int, line[1:])
+        if f_name == "my_min":
+            res = my_min(*params)
+            fptr.write(f"{res}\n")
+        elif f_name == "my_max":
+            res = my_max(*params)
+            fptr.write(f"{res}\n")
+        elif f_name == "my_sum":
+            res = my_sum(*params)
+            fptr.write(f"{res}\n")
+        else:
+            raise ValueError("Unknown function name %s" % f_name)
+    fptr.close()
+    
