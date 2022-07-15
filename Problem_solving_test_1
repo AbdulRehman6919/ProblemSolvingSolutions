@@ -1,5 +1,13 @@
 #Maximize the Difference
 
+
+#Some inputs to the file:
+# temp_list = [7,1,2,5]  
+# temp_list = [2,3,10,2,4,8,1]
+# temp_list = [7,9,5,6,3,2]
+# temp_list = [7,5,3,1]
+# temp_list = [10,20,3,4,50,160]
+
 def maximize_diff(temp_list):
     curr_val = -1
     for index,value  in enumerate(temp_list[1:]):
