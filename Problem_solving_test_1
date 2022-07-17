@@ -45,3 +45,101 @@ def calculate_combinations(skills,min_players,minLevel,maxLevel):
 # maxLevel = 10
 # combinations = calculate_combinations(skills,min_players,minLevel,maxLevel)
 # print("Total combinations are: ",combinations)
+
+
+
+
+#Merging the Pallendromes
+
+def return_dict(s1):
+    dict_1={}
+    for i in s1:
+        if i not in dict_1:
+            dict_1[i] = s1.count(i)
+    return dict_1
+
+
+
+def returns_odd_list(dict_1):
+    odd_list=[]
+    for key in dict_1:
+        if  dict_1[key] ==1:
+            odd_list.append(key)
+        elif dict_1[key]%2==0:
+            whole_list.extend(list(key*(dict_1[key])))
+        else:
+            whole_list.extend(list(key*(dict_1[key]-1)))
+            odd_list.append(key)
+    odd_list.sort()
+    if len(odd_list)>=1:
+        return odd_list[0]
+    return  ""
+
+def returns_final_list(dict_1):
+    even_list,odd_list=[],[]
+    for key in dict_1:
+        if dict_1[key] ==1:
+            odd_list.append(key)
+        elif dict_1[key]%2==0:
+            even_list.append(key*(dict_1[key]//2))
+        else:
+            even_list.append(key*((dict_1[key]-1)//2))
+            odd_list.append(key)
+    odd_list.sort()
+    even_list.sort()
+    check =False
+    if len(odd_list)>=1:
+        return "".join(even_list)+str(odd_list[0]),True
+    return  "".join(even_list)+"",False
+
+
+def merging_pallendromes(s1,s2):
+    global whole_list
+    whole_list = []
+
+    data= return_dict(s1)
+    odd_element = returns_odd_list(data)
+    whole_list.append(odd_element)
+    data= return_dict(s2)
+    odd_element = returns_odd_list(data)
+    whole_list.append(odd_element)
+    data = return_dict("".join(whole_list))
+    new_data = returns_final_list(data)
+
+    if new_data[1] ==True:
+        return(new_data[0][:]+new_data[0][len(new_data[0])-2::-1])
+    else:
+        return (new_data[0][:]+new_data[0][::-1])
+
+    
+# s1= 'aabbc'
+# s2 = 'ddefefq'
+# merging_pallendromes(s1,s2)
+    
+s1= 'aab'
+s2 = 'cca'
+merging_pallendromes(s1,s2)
+
+
+#Maximize the Difference
+
+def maximize_difference(new_list):
+    new_list.sort()
+    new_array = []
+    if len(new_list) %2==0:
+        for i,j in zip(range((len(new_list)//2)-1,-1,-1),range((len(new_list)//2),len(new_list))):
+            new_array.extend([new_list[i],new_list[j]])
+    else:
+        new_array.append(new_list[len(new_list)//2])
+        for i,j in zip(range(0, len(new_list)//2),range((len(new_list)//2)+1,len(new_list))):
+            new_array.extend([new_list[j],new_list[i]])
+    return new_array
+
+new_list=[1,2,3,4,5]
+new_list = [5,7,9,21,34]
+new_list=[1,2,3,4]
+new_list = [4,5]
+new_list = [100,10,40,50,60]
+new_list = [0,2,3,4,6,8]
+maximize_difference(new_list) 
+
