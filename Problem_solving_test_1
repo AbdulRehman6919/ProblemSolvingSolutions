@@ -21,3 +21,28 @@ def maximize_diff(temp_list):
     return curr_val
     
     
+
+#Team Formation 2
+
+from functools import reduce
+from operator import mul
+
+def factorial_num(num):
+    if num==0 or num ==1:
+        return 1
+    return reduce(mul,range(1,num+1))
+
+def calculate_combinations(skills,min_players,minLevel,maxLevel):
+    temp_list = [i for i in skills if i>=minLevel and i<=maxLevel]
+    total_comb = 0
+    for i in range(min_players,len(temp_list)+1):
+        temp_var = factorial_num(len(temp_list)) //(factorial_num(i)*factorial_num(len(temp_list)-i))
+        total_comb +=temp_var
+    return total_comb
+
+# skills = [12,4,6,13,5,10] 
+# min_players = 3
+# minLevel = 4
+# maxLevel = 10
+# combinations = calculate_combinations(skills,min_players,minLevel,maxLevel)
+# print("Total combinations are: ",combinations)
